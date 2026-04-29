@@ -1,0 +1,1728 @@
+<!--
+  templateType: page
+  isAvailableForNewContent: true
+  label: HR English Academy - Badge Generator
+  screenshotPath: ../images/template-previews/hr-academy-badge.png
+-->
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HR English Academy — fluentbe</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Serif:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --brand-blue: #0782FF;
+    --brand-blue-dark: #0066DE;
+    --brand-blue-soft: #E6F3FF;
+    --brand-teal: #0991A6;
+    --brand-teal-light: #2AD1EA;
+    --brand-teal-soft: #E9FAFD;
+    --brand-yellow: #FFD447;
+    --brand-yellow-soft: #FEF6DA;
+    --brand-green: #0CA51E;
+    --ink: #1A2332;
+    --ink-soft: #46505E;
+    --ink-muted: #7A8492;
+    --paper: #FFFFFF;
+    --paper-dim: #F7F9FC;
+    --border: #E4E9F0;
+    --shadow-sm: 0 1px 2px rgba(16, 24, 40, 0.05);
+    --shadow-md: 0 4px 12px rgba(16, 24, 40, 0.08);
+    --shadow-lg: 0 12px 32px rgba(16, 24, 40, 0.12);
+    --shadow-xl: 0 24px 64px rgba(7, 130, 255, 0.18);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    font-family: 'IBM Plex Sans', -apple-system, sans-serif;
+    color: var(--ink);
+    background: var(--paper-dim);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body {
+    min-height: 100vh;
+    background:
+      radial-gradient(ellipse at top left, rgba(7, 130, 255, 0.08), transparent 50%),
+      radial-gradient(ellipse at bottom right, rgba(9, 145, 166, 0.06), transparent 50%),
+      var(--paper-dim);
+  }
+
+  /* ---------- Header ---------- */
+  .fb-badge-app .header {
+    background: var(--paper);
+    border-bottom: 1px solid var(--border);
+    padding: 16px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    backdrop-filter: blur(12px);
+    background: rgba(255, 255, 255, 0.92);
+  }
+  .logo-row { display: flex; align-items: center; gap: 12px; }
+  .logo-svg { height: 28px; width: auto; }
+  .fb-badge-app .pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 10px;
+    background: var(--brand-teal-soft);
+    color: var(--brand-teal);
+    border-radius: 100px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  .fb-badge-app .pill::before {
+    content: '';
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--brand-teal-light);
+    box-shadow: 0 0 0 3px rgba(42, 209, 234, 0.25);
+    animation: pulse 2s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { box-shadow: 0 0 0 3px rgba(42, 209, 234, 0.25); }
+    50% { box-shadow: 0 0 0 6px rgba(42, 209, 234, 0.1); }
+  }
+
+  .fb-badge-app .progress-bar {
+    display: flex;
+    gap: 4px;
+    align-items: center;
+  }
+  .fb-badge-app .progress-dot {
+    width: 24px;
+    height: 4px;
+    border-radius: 2px;
+    background: var(--border);
+    transition: all 0.3s ease;
+  }
+  .progress-dot.active { background: var(--brand-blue); width: 32px; }
+  .progress-dot.done { background: var(--brand-blue); }
+
+  /* ---------- Main container ---------- */
+  .fb-badge-app main {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 48px 24px 96px;
+  }
+
+  .fb-badge-app .step {
+    display: none;
+    animation: fadeIn 0.4s ease;
+  }
+  .step.active { display: block; }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ---------- Typography ---------- */
+  .fb-badge-app .eyebrow {
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--brand-blue);
+    margin-bottom: 12px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .fb-badge-app .eyebrow::before {
+    content: '';
+    width: 24px;
+    height: 1px;
+    background: var(--brand-blue);
+  }
+
+  .fb-badge-app h1.display {
+    font-family: 'IBM Plex Serif', serif;
+    font-size: clamp(32px, 5vw, 56px);
+    font-weight: 600;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    margin-bottom: 20px;
+  }
+  .fb-badge-app h1.display .accent {
+    background: linear-gradient(135deg, var(--brand-blue) 0%, var(--brand-teal) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    font-style: italic;
+    display: inline-block;
+    padding-bottom: 0.08em;
+  }
+
+  .fb-badge-app h2.section {
+    font-family: 'IBM Plex Serif', serif;
+    font-size: clamp(26px, 3.5vw, 36px);
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    margin-bottom: 12px;
+    color: var(--ink);
+  }
+
+  .fb-badge-app .lead {
+    font-size: 18px;
+    color: var(--ink-soft);
+    line-height: 1.55;
+    max-width: 560px;
+  }
+
+  /* ---------- Landing / Step 0 ---------- */
+  .fb-badge-app .hero {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 64px;
+    align-items: center;
+    min-height: 60vh;
+  }
+  @media (max-width: 840px) {
+    .hero { grid-template-columns: 1fr; gap: 40px; }
+  }
+
+  .fb-badge-app .hero-meta {
+    display: flex;
+    gap: 24px;
+    margin-top: 32px;
+    padding-top: 32px;
+    border-top: 1px solid var(--border);
+  }
+  .meta-item { }
+  .fb-badge-app .meta-value {
+    font-family: 'IBM Plex Serif', serif;
+    font-size: 28px;
+    font-weight: 600;
+    color: var(--brand-blue);
+    line-height: 1;
+  }
+  .fb-badge-app .meta-label {
+    font-size: 12px;
+    color: var(--ink-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-top: 4px;
+  }
+
+  /* Hero preview card */
+  .fb-badge-app .hero-preview {
+    position: relative;
+    perspective: 1200px;
+  }
+  .fb-badge-app .preview-card {
+    aspect-ratio: 4 / 5;
+    border-radius: 20px;
+    background: linear-gradient(135deg, #0F2748 0%, #0782FF 50%, #0991A6 100%);
+    box-shadow: var(--shadow-xl);
+    position: relative;
+    overflow: hidden;
+    transform: rotate(-3deg);
+    transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  .fb-badge-app .hero-preview:hover .preview-card {
+    transform: rotate(-1deg) translateY(-4px);
+  }
+  .fb-badge-app .preview-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(circle at 30% 20%, rgba(255, 212, 71, 0.3), transparent 40%),
+      radial-gradient(circle at 70% 80%, rgba(42, 209, 234, 0.4), transparent 50%);
+    pointer-events: none;
+  }
+  .fb-badge-app .preview-card-inner {
+    position: absolute;
+    inset: 14px;
+    border: 1px solid rgba(255,255,255,0.22);
+    border-radius: 14px;
+    padding: 20px 20px 22px;
+    display: flex;
+    flex-direction: column;
+    color: white;
+  }
+  .fb-badge-app .preview-logo {
+    display: block;
+    width: 56%;
+    max-width: 200px;
+    margin: 6px auto 14px;
+    height: auto;
+  }
+  .fb-badge-app .preview-divider {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+  .preview-divider::before,
+  .fb-badge-app .preview-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: rgba(255,255,255,0.22);
+  }
+  .fb-badge-app .preview-divider-dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: #FFD447;
+  }
+  .fb-badge-app .preview-photo {
+    flex: 1;
+    border-radius: 10px;
+    border: 2px solid rgba(255, 212, 71, 0.65);
+    background: rgba(255,255,255,0.04);
+    overflow: hidden;
+    position: relative;
+    min-height: 180px;
+  }
+  .fb-badge-app .preview-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .fb-badge-app .preview-stamp {
+    position: absolute;
+    right: 12px;
+    bottom: 12px;
+    width: 54px;
+    height: 54px;
+    border-radius: 50%;
+    background: #FFD447;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: 'IBM Plex Sans', sans-serif;
+    color: #0F2748;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    border: 1px solid rgba(15, 39, 72, 0.2);
+    z-index: 2;
+  }
+  .fb-badge-app .preview-stamp-top {
+    font-size: 7px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    line-height: 1;
+    margin-bottom: 2px;
+  }
+  .fb-badge-app .preview-stamp-year {
+    font-family: 'IBM Plex Serif', serif;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 1;
+  }
+  .fb-badge-app .preview-bottom {
+    margin-top: 16px;
+    text-align: center;
+  }
+  .fb-badge-app .preview-bottom-kicker {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    color: #FFD447;
+    margin-bottom: 4px;
+  }
+  .fb-badge-app .preview-title {
+    font-family: 'IBM Plex Serif', serif;
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 1.1;
+  }
+  .fb-badge-app .preview-subtitle {
+    font-size: 11px;
+    opacity: 0.75;
+    margin-top: 4px;
+  }
+
+  /* Decorative floating badges */
+  .fb-badge-app .floating-badge {
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: var(--paper);
+    box-shadow: var(--shadow-lg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--ink);
+    z-index: 2;
+  }
+  .fb-badge-app .floating-badge.top-right {
+    top: -20px;
+    right: -16px;
+    background: var(--brand-yellow);
+    animation: float 4s ease-in-out infinite;
+  }
+  .fb-badge-app .floating-badge.bottom-left {
+    bottom: 20px;
+    left: -20px;
+    background: var(--brand-teal-light);
+    color: white;
+    animation: float 4s ease-in-out infinite 2s;
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0) rotate(-5deg); }
+    50% { transform: translateY(-8px) rotate(5deg); }
+  }
+
+  /* ---------- Buttons ---------- */
+  .fb-badge-app .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 14px 28px;
+    border-radius: 10px;
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    text-decoration: none;
+    line-height: 1;
+  }
+  .fb-badge-app .btn-primary {
+    background: var(--brand-blue);
+    color: white;
+    box-shadow: 0 1px 2px rgba(7, 130, 255, 0.2), 0 4px 12px rgba(7, 130, 255, 0.2);
+  }
+  .fb-badge-app .btn-primary:hover {
+    background: var(--brand-blue-dark);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(7, 130, 255, 0.25), 0 8px 24px rgba(7, 130, 255, 0.3);
+  }
+  .btn-primary:active { transform: translateY(0); }
+  .fb-badge-app .btn-secondary {
+    background: transparent;
+    color: var(--ink);
+    border: 1px solid var(--border);
+  }
+  .fb-badge-app .btn-secondary:hover {
+    border-color: var(--ink);
+    background: var(--paper);
+  }
+  .fb-badge-app .btn-ghost {
+    background: transparent;
+    color: var(--ink-soft);
+    padding: 10px 16px;
+  }
+  .btn-ghost:hover { color: var(--ink); }
+
+  .btn-lg { padding: 18px 36px; font-size: 16px; }
+
+  .fb-badge-app .btn-row {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    margin-top: 32px;
+    flex-wrap: wrap;
+  }
+
+  /* ---------- Goal cards ---------- */
+  .fb-badge-app .goals-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    margin-top: 40px;
+  }
+  @media (max-width: 640px) {
+    .goals-grid { grid-template-columns: 1fr; }
+  }
+  .fb-badge-app .goal-card {
+    background: var(--paper);
+    border: 1.5px solid var(--border);
+    border-radius: 14px;
+    padding: 24px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    text-align: left;
+    font-family: inherit;
+    font-size: inherit;
+    color: inherit;
+    width: 100%;
+  }
+  .fb-badge-app .goal-card:hover {
+    border-color: var(--brand-blue);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+  }
+  .fb-badge-app .goal-card.selected {
+    border-color: var(--brand-blue);
+    background: var(--brand-blue-soft);
+    box-shadow: 0 0 0 3px rgba(7, 130, 255, 0.1);
+  }
+  .fb-badge-app .goal-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    background: var(--brand-blue-soft);
+    color: var(--brand-blue);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .fb-badge-app .goal-card.selected .goal-icon {
+    background: var(--brand-blue);
+    color: white;
+  }
+  .fb-badge-app .goal-text h3 {
+    font-family: 'IBM Plex Serif', serif;
+    font-size: 17px;
+    font-weight: 600;
+    margin-bottom: 4px;
+    color: var(--ink);
+  }
+  .fb-badge-app .goal-text p {
+    font-size: 13px;
+    color: var(--ink-soft);
+    line-height: 1.45;
+  }
+
+  /* ---------- Upload ---------- */
+  .fb-badge-app .upload-area {
+    border: 2px dashed var(--border);
+    border-radius: 16px;
+    padding: 48px 24px;
+    text-align: center;
+    background: var(--paper);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin-top: 32px;
+    position: relative;
+    overflow: hidden;
+  }
+  .fb-badge-app .upload-area:hover {
+    border-color: var(--brand-blue);
+    background: var(--brand-blue-soft);
+  }
+  .fb-badge-app .upload-area.dragging {
+    border-color: var(--brand-blue);
+    background: var(--brand-blue-soft);
+  }
+  .fb-badge-app .upload-area.has-file {
+    border-style: solid;
+    border-color: var(--brand-green);
+    padding: 24px;
+  }
+  .fb-badge-app .upload-icon {
+    width: 64px;
+    height: 64px;
+    margin: 0 auto 16px;
+    background: var(--brand-blue-soft);
+    color: var(--brand-blue);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .fb-badge-app .upload-title {
+    font-family: 'IBM Plex Serif', serif;
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+  .fb-badge-app .upload-sub {
+    font-size: 13px;
+    color: var(--ink-muted);
+  }
+  .fb-badge-app .upload-preview {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    text-align: left;
+  }
+  .fb-badge-app .upload-preview img {
+    width: 72px;
+    height: 72px;
+    border-radius: 10px;
+    object-fit: cover;
+  }
+  .upload-preview-info { flex: 1; }
+  .fb-badge-app .upload-preview-name {
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+  .fb-badge-app .upload-preview-size {
+    font-size: 13px;
+    color: var(--ink-muted);
+  }
+  .fb-badge-app .remove-btn {
+    background: none;
+    border: none;
+    color: var(--ink-muted);
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 8px;
+    transition: all 0.15s ease;
+  }
+  .fb-badge-app .remove-btn:hover {
+    background: #FEE2DC;
+    color: #AF0D0D;
+  }
+
+  #fileInput { display: none; }
+
+  .fb-badge-app .consent {
+    margin-top: 20px;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 14px 16px;
+    background: var(--paper);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    font-size: 13px;
+    color: var(--ink-soft);
+    line-height: 1.5;
+  }
+  .fb-badge-app .consent input[type="checkbox"] {
+    margin-top: 2px;
+    width: 16px;
+    height: 16px;
+    accent-color: var(--brand-blue);
+    flex-shrink: 0;
+  }
+  .fb-badge-app .consent a {
+    color: var(--brand-blue);
+    text-decoration: none;
+  }
+  .consent a:hover { text-decoration: underline; }
+
+  /* ---------- Preview / Result step ---------- */
+  .fb-badge-app .result-grid {
+    display: grid;
+    grid-template-columns: minmax(260px, 380px) 1fr;
+    gap: 48px;
+    align-items: start;
+    margin-top: 32px;
+  }
+  @media (max-width: 840px) {
+    .result-grid { grid-template-columns: 1fr; gap: 32px; }
+  }
+
+  .fb-badge-app .canvas-wrapper {
+    position: relative;
+  }
+  .fb-badge-app #badgeCanvas {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 16px;
+    box-shadow: var(--shadow-xl);
+  }
+
+  .fb-badge-app .share-panel {
+    background: var(--paper);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 28px;
+  }
+  .fb-badge-app .share-panel h3 {
+    font-family: 'IBM Plex Serif', serif;
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+  .fb-badge-app .share-panel p.sub {
+    font-size: 14px;
+    color: var(--ink-muted);
+    margin-bottom: 24px;
+  }
+
+  .fb-badge-app .action-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 28px;
+  }
+  .fb-badge-app .action-row {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    padding: 12px 14px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    font-size: 14px;
+    color: var(--ink-soft);
+  }
+  .fb-badge-app .action-row svg {
+    color: var(--brand-blue);
+    flex-shrink: 0;
+  }
+  .action-row strong { color: var(--ink); font-weight: 600; }
+
+  .fb-badge-app .post-box {
+    background: var(--paper-dim);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 18px;
+    font-family: 'IBM Plex Sans', monospace;
+    font-size: 13px;
+    line-height: 1.65;
+    color: var(--ink);
+    white-space: pre-wrap;
+    position: relative;
+    margin-bottom: 12px;
+    max-height: 260px;
+    overflow-y: auto;
+  }
+
+  .fb-badge-app .copy-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 16px;
+    background: var(--ink);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  .copy-btn:hover { background: #2D3645; transform: translateY(-1px); }
+  .copy-btn.copied { background: var(--brand-green); }
+
+  /* ---------- Loading ---------- */
+  .fb-badge-app .loader {
+    text-align: center;
+    padding: 64px 24px;
+  }
+  .fb-badge-app .loader-spinner {
+    width: 56px;
+    height: 56px;
+    border: 3px solid var(--border);
+    border-top-color: var(--brand-blue);
+    border-radius: 50%;
+    margin: 0 auto 24px;
+    animation: spin 0.8s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  .loader-text {
+    font-family: 'IBM Plex Serif', serif;
+    font-size: 20px;
+    color: var(--ink);
+  }
+  .fb-badge-app .loader-sub {
+    font-size: 14px;
+    color: var(--ink-muted);
+    margin-top: 8px;
+  }
+
+  /* ---------- Back nav ---------- */
+  .fb-badge-app .back-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 14px;
+    color: var(--ink-muted);
+    background: none;
+    border: none;
+    padding: 8px 0;
+    cursor: pointer;
+    margin-bottom: 24px;
+    font-family: inherit;
+  }
+  .back-btn:hover { color: var(--ink); }
+
+  /* ---------- Decorative elements ---------- */
+  .fb-badge-app .deco-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(7, 130, 255, 0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(7, 130, 255, 0.04) 1px, transparent 1px);
+    background-size: 32px 32px;
+    pointer-events: none;
+    mask-image: radial-gradient(ellipse at center, black 20%, transparent 70%);
+    z-index: -1;
+  }
+
+  /* ---------- Footer ---------- */
+  .fb-badge-app footer {
+    text-align: center;
+    padding: 24px;
+    font-size: 12px;
+    color: var(--ink-muted);
+    border-top: 1px solid var(--border);
+    margin-top: 64px;
+  }
+  footer a { color: var(--brand-blue); text-decoration: none; }
+
+  /* ---------- Cropper.js — modal overlay ---------- */
+  .crop-dialog-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(15, 25, 50, 0.78);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    z-index: 1000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    animation: modalFadeIn 0.2s ease;
+  }
+  .crop-dialog-overlay.active { display: flex; }
+  @keyframes modalFadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  .crop-dialog {
+    background: var(--paper);
+    border-radius: 18px;
+    width: 100%;
+    max-width: 640px;
+    max-height: calc(100vh - 48px);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    box-shadow: 0 24px 64px rgba(0, 0, 0, 0.3);
+    animation: modalSlideUp 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  @keyframes modalSlideUp {
+    from { opacity: 0; transform: translateY(20px) scale(0.96); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+  }
+  .crop-dialog-header {
+    padding: 20px 24px 16px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+  }
+  .crop-dialog-header-text { flex: 1; min-width: 0; }
+  .cropper-title {
+    font-family: 'IBM Plex Serif', serif;
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 4px;
+    color: var(--ink);
+  }
+  .cropper-hint {
+    font-size: 13px;
+    color: var(--ink-muted);
+    line-height: 1.45;
+  }
+  .crop-dialog-close {
+    background: none;
+    border: none;
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    cursor: pointer;
+    color: var(--ink-muted);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: all 0.15s ease;
+  }
+  .crop-dialog-close:hover {
+    background: var(--paper-dim);
+    color: var(--ink);
+  }
+  .crop-dialog-body {
+    padding: 24px;
+    flex: 1;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .cropper-container-wrapper {
+    width: 100%;
+    aspect-ratio: 5 / 4;
+    background: var(--paper-dim);
+    border-radius: 12px;
+    overflow: hidden;
+    max-height: 50vh;
+  }
+  .fb-badge-app #cropperImage {
+    display: block;
+    max-width: 100%;
+    max-height: 50vh;
+  }
+  .cropper-controls {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 12px 16px;
+    background: var(--paper-dim);
+    border-radius: 10px;
+  }
+  .cropper-controls .zoom-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--ink-soft);
+    flex-shrink: 0;
+  }
+  .cropper-controls input[type="range"] {
+    flex: 1;
+    accent-color: var(--brand-blue);
+    min-width: 0;
+  }
+  .cropper-controls .zoom-icons {
+    display: flex;
+    color: var(--ink-muted);
+    flex-shrink: 0;
+  }
+  .crop-dialog-footer {
+    padding: 16px 24px 20px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+  }
+  /* Brand colors for Cropper.js overlay */
+  .cropper-line, .cropper-point { background-color: var(--brand-blue) !important; }
+  .cropper-view-box { outline-color: var(--brand-blue) !important; }
+  .fb-badge-app .sr-only {
+    position: absolute;
+    width: 1px; height: 1px;
+    padding: 0; margin: -1px;
+    overflow: hidden;
+    clip: rect(0,0,0,0);
+    white-space: nowrap;
+    border: 0;
+  }
+</style>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.2/cropper.min.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.2/cropper.min.js"></script>
+</head>
+<body>
+<div class="fb-badge-app">
+
+<!-- ---------- HEADER ---------- -->
+<header class="header">
+  <div class="logo-row">
+    <img id="headerLogo" class="logo-svg" alt="fluentbe" style="filter: none;" />
+    <div style="display:flex; flex-direction:column; gap:2px; padding-left:12px; border-left:1px solid var(--border); margin-left:4px;">
+      <div style="font-family:'IBM Plex Serif'; font-weight:600; font-size:15px; line-height:1;">HR English Academy</div>
+      <div style="font-size:11px; color:var(--ink-muted); letter-spacing:0.04em;">Class of 2026 · Generator</div>
+    </div>
+  </div>
+  <div class="pill" id="statusPill">Start</div>
+</header>
+
+<main>
+
+<!-- ============================================================ -->
+<!--                    STEP 1: LANDING                           -->
+<!-- ============================================================ -->
+<section class="step active" id="step-1">
+  <div class="deco-grid"></div>
+  <div class="hero">
+    <div class="hero-copy">
+      <div class="eyebrow">HR English Academy · Start 5 maja</div>
+      <h1 class="display">
+        Zaczynasz kurs. <br>
+        <span class="accent">Powiedz o nim</span> <br>
+        swojej sieci.
+      </h1>
+      <p class="lead">Fluentbe uruchamia HR English Academy — program językowy dedykowany specjalistom HR. Dołączasz do rocznika 2026. Wygeneruj swój obrazek na LinkedIn, udostępnij i pokaż kolegom z branży, że dobry program dla HR-owców wreszcie istnieje.</p>
+      <div class="btn-row">
+        <button class="btn btn-primary btn-lg" onclick="goToStep(3)">
+          Stwórz mój obrazek
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </button>
+      </div>
+
+      <div class="hero-meta">
+        <div class="meta-item">
+          <div class="meta-value">~2 min</div>
+          <div class="meta-label">Generowanie</div>
+        </div>
+        <div class="meta-item">
+          <div class="meta-value">4:5</div>
+          <div class="meta-label">Format LinkedIn</div>
+        </div>
+        <div class="meta-item">
+          <div class="meta-value">PNG</div>
+          <div class="meta-label">Do pobrania</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-preview">
+      <div class="floating-badge top-right">
+        <span>Class<br>of 2026</span>
+      </div>
+      <div class="floating-badge bottom-left">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+          <circle cx="8.5" cy="7" r="4"/>
+          <polyline points="17 11 19 13 23 9"/>
+        </svg>
+      </div>
+      <div class="preview-card">
+        <div class="preview-card-inner">
+          <img id="previewLogo" class="preview-logo" alt="fluentbe" />
+          <div class="preview-divider">
+            <span class="preview-divider-dot"></span>
+          </div>
+          <div class="preview-photo">
+            <img id="previewSample" alt="Przykład wygenerowanego obrazka" />
+            <div class="preview-stamp">
+              <span class="preview-stamp-top">CLASS OF</span>
+              <span class="preview-stamp-year">2026</span>
+            </div>
+          </div>
+          <div class="preview-bottom">
+            <div class="preview-bottom-kicker">DOŁĄCZAM DO</div>
+            <div class="preview-title">HR English Academy</div>
+            <div class="preview-subtitle">Rocznik 2026</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!--                    STEP 3: UPLOAD                            -->
+<!-- ============================================================ -->
+<section class="step" id="step-3">
+  <button class="back-btn" onclick="goToStep(1)">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+    Wróć
+  </button>
+  <h2 class="section">Dodaj swoje zdjęcie</h2>
+  <p class="lead">Profesjonalne zdjęcie twarzy — takie jak na LinkedIn. Wykadrujemy je automatycznie i umieścimy w ramce. Im ostrzejsze i lepiej oświetlone, tym lepszy efekt.</p>
+
+  <div class="upload-area" id="uploadArea" onclick="document.getElementById('fileInput').click()">
+    <div id="uploadPlaceholder">
+      <div class="upload-icon">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+          <polyline points="17 8 12 3 7 8"/>
+          <line x1="12" y1="3" x2="12" y2="15"/>
+        </svg>
+      </div>
+      <div class="upload-title">Przeciągnij zdjęcie lub kliknij, aby wybrać</div>
+      <div class="upload-sub">JPG, PNG lub WebP · max 5 MB · zalecane 800×1000 px</div>
+    </div>
+    <input type="file" id="fileInput" accept="image/jpeg,image/png,image/webp">
+  </div>
+
+  <label class="consent">
+    <input type="checkbox" id="consentCheck">
+    <span>Potwierdzam, że zdjęcie przedstawia mnie, mam prawo do jego użycia i zgadzam się na jego użycie wyłącznie do wygenerowania obrazka. <a href="#" onclick="event.preventDefault()">Regulamin</a> · <a href="#" onclick="event.preventDefault()">Polityka prywatności</a></span>
+  </label>
+
+  <div class="btn-row">
+    <button class="btn btn-primary btn-lg" id="uploadNext" onclick="generateBadge()" disabled style="opacity:0.5; cursor:not-allowed;">
+      Wygeneruj obrazek
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+    </button>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!--                    STEP 4: LOADING                           -->
+<!-- ============================================================ -->
+<section class="step" id="step-loading">
+  <div class="loader">
+    <div class="loader-spinner"></div>
+    <div class="loader-text">Tworzymy Twój obrazek…</div>
+    <div class="loader-sub">To zajmie chwilę. Komponujemy zdjęcie z brandingiem HR English Academy.</div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!--                    STEP 5: RESULT                            -->
+<!-- ============================================================ -->
+<section class="step" id="step-4">
+  <h2 class="section">Gotowe. Twój obrazek czeka</h2>
+  <p class="lead">Pobierz obraz, skopiuj propozycję posta i ruszaj na LinkedIn. Oznacz <strong>@fluentbe</strong> i użyj hashtagu <strong>#HREnglishAcademy</strong>, żeby być częścią rocznika 2026.</p>
+
+  <div class="result-grid">
+    <div class="canvas-wrapper">
+      <canvas id="badgeCanvas" width="1200" height="1500"></canvas>
+      <div class="btn-row" style="margin-top:16px;">
+        <button class="btn btn-primary" onclick="downloadBadge()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Pobierz PNG
+        </button>
+        <button class="btn btn-secondary" onclick="goToStep(3)">
+          Zmień zdjęcie
+        </button>
+      </div>
+    </div>
+
+    <div class="share-panel">
+      <h3>Udostępnij na LinkedIn</h3>
+      <p class="sub">4 rzeczy do zrobienia, żeby maksymalnie wykorzystać posta:</p>
+
+      <div class="action-list">
+        <div class="action-row">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          <span>Dodaj hashtag <strong>#HREnglishAcademy</strong></span>
+        </div>
+        <div class="action-row">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          <span>Oznacz stronę <strong>@fluentbe</strong></span>
+        </div>
+        <div class="action-row">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          <span>Dodaj go jako <strong>grafikę posta</strong></span>
+        </div>
+        <div class="action-row">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          <span>Zaproś 1–2 kolegów z HR do dołączenia</span>
+        </div>
+      </div>
+
+      <div style="font-size:13px; font-weight:600; color:var(--ink); margin-bottom:10px; display:flex; justify-content:space-between; align-items:center;">
+        <span>Propozycja posta</span>
+        <span style="font-size:11px; color:var(--ink-muted); font-weight:400;">Możesz edytować</span>
+      </div>
+      <div class="post-box" id="postText" contenteditable="true"></div>
+      <button class="copy-btn" id="copyBtn" onclick="copyPost()">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+        Skopiuj tekst
+      </button>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ============================================================ -->
+<!--                  CROPPER MODAL                                -->
+<!-- ============================================================ -->
+<div class="crop-dialog-overlay" id="cropperModal" role="dialog" aria-modal="true" aria-labelledby="cropperModalTitle">
+  <div class="crop-dialog">
+    <div class="crop-dialog-header">
+      <div class="crop-dialog-header-text">
+        <div class="cropper-title" id="cropperModalTitle">Wykadruj zdjęcie</div>
+        <div class="cropper-hint">Przeciągnij zdjęcie i ustaw twarz w środkowej części kadru. Użyj suwaka, żeby przybliżyć lub oddalić.</div>
+      </div>
+      <button class="crop-dialog-close" onclick="cancelCrop()" aria-label="Zamknij">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="crop-dialog-body">
+      <div class="cropper-container-wrapper">
+        <img id="cropperImage" alt="Crop your photo">
+      </div>
+      <div class="cropper-controls">
+        <span class="zoom-icons" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+        </span>
+        <span class="zoom-label">Powiększenie</span>
+        <label for="zoomSlider" class="sr-only">Powiększenie</label>
+        <input type="range" id="zoomSlider" min="0" max="100" value="0" step="1">
+        <span class="zoom-icons" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="8" y1="11" x2="14" y2="11"/><line x1="11" y1="8" x2="11" y2="14"/></svg>
+        </span>
+      </div>
+    </div>
+    <div class="crop-dialog-footer">
+      <button class="btn btn-secondary" onclick="cancelCrop()">Anuluj</button>
+      <button class="btn btn-primary" onclick="confirmCrop()">Zapisz kadr</button>
+    </div>
+  </div>
+</div>
+
+<footer>
+  © 2026 fluentbe · HR English Academy · Problem? Napisz na <a href="mailto:hello@fluentbe.com">hello@fluentbe.com</a>
+</footer>
+
+<script>
+// ============================================================
+//                 LOGO DATA URLS (fluentbe brand)
+// ============================================================
+const LOGO_BLUE_URL = 'https://146376216.fs1.hubspotusercontent-eu1.net/hubfs/146376216/hr-academy-badge/fluentbe-logo-blue.svg';
+const LOGO_WHITE_URL = 'https://146376216.fs1.hubspotusercontent-eu1.net/hubfs/146376216/hr-academy-badge/fluentbe-logo-white.svg';
+const SAMPLE_PORTRAIT_URL = 'https://146376216.fs1.hubspotusercontent-eu1.net/hubfs/146376216/hr-academy-badge/sample-portrait.jpg';
+
+// Set logo in header on page load
+document.addEventListener('DOMContentLoaded', () => {
+  const headerLogo = document.getElementById('headerLogo');
+  if (headerLogo) headerLogo.src = LOGO_BLUE_URL;
+  const previewLogo = document.getElementById('previewLogo');
+  if (previewLogo) previewLogo.src = LOGO_WHITE_URL;
+  const previewSample = document.getElementById('previewSample');
+  if (previewSample) previewSample.src = SAMPLE_PORTRAIT_URL;
+});
+
+// ============================================================
+//                      STATE
+// ============================================================
+const state = {
+  step: 1,
+  imageFile: null,
+  imageDataUrl: null,
+  consent: false,
+  cropper: null,
+  cropperBaseWidth: null,
+};
+
+// ============================================================
+//                    STEP NAVIGATION
+// ============================================================
+function goToStep(n) {
+  // Mapowanie: 1=landing, 2=goal, 3=upload, 4=result, loading=intermediate
+  document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+  const stepId = n === 'loading' ? 'step-loading' : `step-${n}`;
+  document.getElementById(stepId).classList.add('active');
+  state.step = n;
+  updateStatusPill(n);
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function updateStatusPill(n) {
+  const pill = document.getElementById('statusPill');
+  const map = { 1: 'Start', 3: 'Krok 1 z 2', 'loading': 'Generujemy…', 4: 'Gotowe!' };
+  pill.textContent = map[n] || 'Start';
+}
+
+// ============================================================
+//                    UPLOAD
+// ============================================================
+const fileInput = document.getElementById('fileInput');
+const uploadArea = document.getElementById('uploadArea');
+const consentCheck = document.getElementById('consentCheck');
+
+fileInput.addEventListener('change', (e) => handleFile(e.target.files[0]));
+
+uploadArea.addEventListener('dragover', (e) => {
+  e.preventDefault();
+  uploadArea.classList.add('dragging');
+});
+uploadArea.addEventListener('dragleave', () => uploadArea.classList.remove('dragging'));
+uploadArea.addEventListener('drop', (e) => {
+  e.preventDefault();
+  uploadArea.classList.remove('dragging');
+  handleFile(e.dataTransfer.files[0]);
+});
+
+function handleFile(file) {
+  if (!file) return;
+  if (!file.type.match(/^image\/(jpeg|png|webp)$/)) {
+    alert('Obsługiwane formaty: JPG, PNG, WebP');
+    return;
+  }
+  if (file.size > 5 * 1024 * 1024) {
+    alert('Zdjęcie za duże — max 5 MB');
+    return;
+  }
+  state.imageFile = file;
+  const reader = new FileReader();
+  reader.onload = (e) => {
+    state.imageDataUrl = e.target.result;
+    showFilePreview(file, e.target.result);
+    initCropper(e.target.result);
+    updateUploadNext();
+  };
+  reader.readAsDataURL(file);
+}
+
+// ============================================================
+//                    CROPPER.JS  (modal)
+// ============================================================
+// Stores cropped result so generateBadge() can use it later
+function initCropper(dataUrl) {
+  const cropperImage = document.getElementById('cropperImage');
+  const cropperModal = document.getElementById('cropperModal');
+  const zoomSlider = document.getElementById('zoomSlider');
+
+  // Destroy existing cropper if any
+  if (state.cropper) {
+    state.cropper.destroy();
+    state.cropper = null;
+  }
+
+  cropperImage.src = dataUrl;
+  cropperModal.classList.add('active');
+  document.body.style.overflow = 'hidden'; // prevent background scroll
+
+  // Wait for image to load before initializing Cropper
+  const initialize = () => {
+    state.cropper = new Cropper(cropperImage, {
+      aspectRatio: 5 / 4,
+      viewMode: 1,
+      dragMode: 'move',
+      autoCropArea: 0.85,
+      cropBoxResizable: false,
+      cropBoxMovable: false,
+      toggleDragModeOnDblclick: false,
+      background: false,
+      modal: true,
+      guides: true,
+      center: true,
+      highlight: false,
+      responsive: true,
+      ready() {
+        // Capture the BASE canvas data after fit-to-container.
+        // Slider 0 = base zoom; -50 = half size; +50 = 1.5x size.
+        const canvasData = state.cropper.getCanvasData();
+        state.cropperBaseWidth = canvasData.width;
+        zoomSlider.value = 0;
+      }
+    });
+  };
+
+  if (cropperImage.complete && cropperImage.naturalWidth) {
+    initialize();
+  } else {
+    cropperImage.onload = initialize;
+  }
+}
+
+function confirmCrop() {
+  if (!state.cropper) {
+    closeCropperModal();
+    return;
+  }
+  const croppedCanvas = state.cropper.getCroppedCanvas({
+    width: 1000,
+    height: 800,
+    imageSmoothingEnabled: true,
+    imageSmoothingQuality: 'high',
+  });
+  if (croppedCanvas) {
+    state.imageDataUrl = croppedCanvas.toDataURL('image/jpeg', 0.92);
+  }
+  closeCropperModal();
+}
+
+function cancelCrop() {
+  // User cancelled — clear upload entirely
+  closeCropperModal();
+  removeFile();
+}
+
+function closeCropperModal() {
+  const cropperModal = document.getElementById('cropperModal');
+  cropperModal.classList.remove('active');
+  document.body.style.overflow = '';
+  if (state.cropper) {
+    state.cropper.destroy();
+    state.cropper = null;
+  }
+  state.cropperBaseWidth = null;
+}
+
+// Zoom slider — 0 = fit-to-container (base), 100 = 2x zoom in
+document.getElementById('zoomSlider').addEventListener('input', (e) => {
+  if (!state.cropper || !state.cropperBaseWidth) return;
+  const value = parseInt(e.target.value, 10);
+  // value=0 -> 1.0x base, value=100 -> 2.0x base
+  const targetWidth = state.cropperBaseWidth * (1 + value / 100);
+  const naturalWidth = state.cropper.getImageData().naturalWidth;
+  if (!naturalWidth) return;
+  state.cropper.zoomTo(targetWidth / naturalWidth);
+});
+
+// Close on overlay click (outside modal box)
+document.getElementById('cropperModal').addEventListener('click', (e) => {
+  if (e.target === document.getElementById('cropperModal')) {
+    cancelCrop();
+  }
+});
+
+// Close on ESC key
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && document.getElementById('cropperModal').classList.contains('active')) {
+    cancelCrop();
+  }
+});
+
+function showFilePreview(file, dataUrl) {
+  const placeholder = document.getElementById('uploadPlaceholder');
+  uploadArea.classList.add('has-file');
+  const sizeKB = (file.size / 1024).toFixed(0);
+  placeholder.innerHTML = `
+    <div class="upload-preview">
+      <img src="${dataUrl}" alt="preview">
+      <div class="upload-preview-info">
+        <div class="upload-preview-name">${file.name}</div>
+        <div class="upload-preview-size">${sizeKB} KB · ${file.type.split('/')[1].toUpperCase()}</div>
+      </div>
+      <button class="remove-btn" onclick="event.stopPropagation(); removeFile();" aria-label="Usuń">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+  `;
+}
+
+function removeFile() {
+  state.imageFile = null;
+  state.imageDataUrl = null;
+  uploadArea.classList.remove('has-file');
+  // Destroy cropper if open
+  if (state.cropper) {
+    state.cropper.destroy();
+    state.cropper = null;
+  }
+  state.cropperBaseWidth = null;
+  document.getElementById('uploadPlaceholder').innerHTML = `
+    <div class="upload-icon">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+        <polyline points="17 8 12 3 7 8"/>
+        <line x1="12" y1="3" x2="12" y2="15"/>
+      </svg>
+    </div>
+    <div class="upload-title">Przeciągnij zdjęcie lub kliknij, aby wybrać</div>
+    <div class="upload-sub">JPG, PNG lub WebP · max 5 MB · zalecane 800×1000 px</div>
+  `;
+  fileInput.value = '';
+  updateUploadNext();
+}
+
+consentCheck.addEventListener('change', () => {
+  state.consent = consentCheck.checked;
+  updateUploadNext();
+});
+
+function updateUploadNext() {
+  const btn = document.getElementById('uploadNext');
+  const ok = state.imageDataUrl && state.consent;
+  btn.disabled = !ok;
+  btn.style.opacity = ok ? '1' : '0.5';
+  btn.style.cursor = ok ? 'pointer' : 'not-allowed';
+}
+
+// ============================================================
+//                    BADGE GENERATOR (Canvas)
+// ============================================================
+function generateBadge() {
+  // imageDataUrl is already cropped at this point (set by confirmCrop)
+  goToStep('loading');
+  setTimeout(() => {
+    drawBadge();
+    goToStep(4);
+    populatePost();
+  }, 1400);
+}
+
+function drawBadge() {
+  const canvas = document.getElementById('badgeCanvas');
+  const ctx = canvas.getContext('2d');
+  const W = canvas.width;
+  const H = canvas.height;
+
+  // Background gradient — fluentbe brand
+  const bgGrad = ctx.createLinearGradient(0, 0, W, H);
+  bgGrad.addColorStop(0, '#0F2748');
+  bgGrad.addColorStop(0.5, '#0066DE');
+  bgGrad.addColorStop(1, '#0991A6');
+  ctx.fillStyle = bgGrad;
+  ctx.fillRect(0, 0, W, H);
+
+  // Overlay — subtle radial glows
+  const glow1 = ctx.createRadialGradient(W * 0.25, H * 0.2, 0, W * 0.25, H * 0.2, W * 0.6);
+  glow1.addColorStop(0, 'rgba(255, 212, 71, 0.18)');
+  glow1.addColorStop(1, 'rgba(255, 212, 71, 0)');
+  ctx.fillStyle = glow1;
+  ctx.fillRect(0, 0, W, H);
+
+  const glow2 = ctx.createRadialGradient(W * 0.8, H * 0.85, 0, W * 0.8, H * 0.85, W * 0.7);
+  glow2.addColorStop(0, 'rgba(42, 209, 234, 0.25)');
+  glow2.addColorStop(1, 'rgba(42, 209, 234, 0)');
+  ctx.fillStyle = glow2;
+  ctx.fillRect(0, 0, W, H);
+
+  // Grid pattern overlay
+  ctx.strokeStyle = 'rgba(255,255,255,0.05)';
+  ctx.lineWidth = 1;
+  for (let x = 0; x < W; x += 40) {
+    ctx.beginPath();
+    ctx.moveTo(x, 0);
+    ctx.lineTo(x, H);
+    ctx.stroke();
+  }
+  for (let y = 0; y < H; y += 40) {
+    ctx.beginPath();
+    ctx.moveTo(0, y);
+    ctx.lineTo(W, y);
+    ctx.stroke();
+  }
+
+  // Inner border frame
+  const MARGIN = 60;
+  ctx.strokeStyle = 'rgba(255,255,255,0.22)';
+  ctx.lineWidth = 1.5;
+  roundRect(ctx, MARGIN, MARGIN, W - MARGIN * 2, H - MARGIN * 2, 24);
+  ctx.stroke();
+
+  // Brand row (top) — LARGE fluentbe logo, centered
+  // Logo SVG natural ratio is 544:126 ≈ 4.32:1
+  const LOGO_W = 340;                     // big, prominent logo
+  const LOGO_H = LOGO_W * (126 / 544);    // ~78px maintaining aspect
+  const LOGO_X = (W - LOGO_W) / 2;
+  const LOGO_Y = MARGIN + 70;
+
+  const BRAND_Y = LOGO_Y + LOGO_H + 32;   // used as reference for subsequent elements
+
+  // Clean divider line below logo
+  const afterLogoDrawn = () => {
+    ctx.strokeStyle = 'rgba(255,255,255,0.2)';
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.moveTo(MARGIN + 80, BRAND_Y);
+    ctx.lineTo(W - MARGIN - 80, BRAND_Y);
+    ctx.stroke();
+
+    // Small decorative dot in center of divider
+    ctx.fillStyle = 'rgba(255, 212, 71, 0.9)';
+    ctx.beginPath();
+    ctx.arc(W / 2, BRAND_Y, 4, 0, Math.PI * 2);
+    ctx.fill();
+  };
+
+  // Photo area — height reduced to fit full bottom section (title + mission + stamp)
+  const PHOTO_TOP = BRAND_Y + 40;
+  const PHOTO_SIZE = W - MARGIN * 2 - 80;   // width: 1000
+  const PHOTO_X = (W - PHOTO_SIZE) / 2;
+  const PHOTO_H = 800;                       // larger now that we removed mission from badge
+
+  // Photo frame bg
+  ctx.fillStyle = 'rgba(255,255,255,0.04)';
+  roundRect(ctx, PHOTO_X, PHOTO_TOP, PHOTO_SIZE, PHOTO_H, 16);
+  ctx.fill();
+
+  // Load fluentbe logo (white) and draw it on top, then the eyebrow, then photo
+  const logoImg = new Image();
+  logoImg.onload = () => {
+    ctx.drawImage(logoImg, LOGO_X, LOGO_Y, LOGO_W, LOGO_H);
+    afterLogoDrawn();
+    loadUserPhoto();
+  };
+  logoImg.onerror = () => {
+    // Fallback: without logo, still render the rest so badge is usable
+    afterLogoDrawn();
+    loadUserPhoto();
+  };
+  logoImg.src = LOGO_WHITE_URL;
+
+  function loadUserPhoto() {
+    const img = new Image();
+    img.onload = () => {
+      // Clip to rounded rect
+      ctx.save();
+      roundRect(ctx, PHOTO_X, PHOTO_TOP, PHOTO_SIZE, PHOTO_H, 16);
+      ctx.clip();
+
+      // Cover fit (aspect fill)
+      const imgRatio = img.width / img.height;
+      const targetRatio = PHOTO_SIZE / PHOTO_H;
+      let sx, sy, sw, sh;
+      if (imgRatio > targetRatio) {
+        sh = img.height;
+        sw = img.height * targetRatio;
+        sx = (img.width - sw) / 2;
+        sy = 0;
+      } else {
+        sw = img.width;
+        sh = img.width / targetRatio;
+        sx = 0;
+        sy = (img.height - sh) / 2;
+      }
+      ctx.drawImage(img, sx, sy, sw, sh, PHOTO_X, PHOTO_TOP, PHOTO_SIZE, PHOTO_H);
+      ctx.restore();
+
+      // Photo border accent
+      ctx.strokeStyle = 'rgba(255,212,71,0.6)';
+      ctx.lineWidth = 3;
+      roundRect(ctx, PHOTO_X, PHOTO_TOP, PHOTO_SIZE, PHOTO_H, 16);
+      ctx.stroke();
+
+      drawBadgeText(ctx, W, H, PHOTO_TOP + PHOTO_H);
+    };
+    img.onerror = () => {
+      drawBadgeText(ctx, W, H, PHOTO_TOP + PHOTO_H);
+    };
+    img.src = state.imageDataUrl;
+  }
+}
+
+function drawBadgeText(ctx, W, H, startY) {
+  const MARGIN = 60;
+  const TEXT_TOP = startY + 56;
+
+  // "DOŁĄCZAM DO" eyebrow
+  ctx.fillStyle = '#FFD447';
+  ctx.font = '700 28px "IBM Plex Sans", sans-serif';
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'top';
+  ctx.fillText('DOŁĄCZAM DO', W / 2, TEXT_TOP);
+
+  // Divider dot
+  ctx.fillStyle = 'rgba(255,255,255,0.6)';
+  ctx.beginPath();
+  ctx.arc(W / 2, TEXT_TOP + 48, 4, 0, Math.PI * 2);
+  ctx.fill();
+
+  // Main title — "HR English Academy"
+  ctx.fillStyle = 'white';
+  ctx.font = '600 72px "IBM Plex Serif", serif';
+  ctx.textAlign = 'center';
+  ctx.fillText('HR English Academy', W / 2, TEXT_TOP + 72);
+
+  // Subtitle
+  ctx.fillStyle = 'rgba(255,255,255,0.75)';
+  ctx.font = '400 26px "IBM Plex Sans", sans-serif';
+  ctx.fillText('Rocznik 2026', W / 2, TEXT_TOP + 180);
+
+  // Corner stamp — bottom right, like an official seal on a certificate
+  const STAMP_R = 72;
+  const STAMP_CX = W - MARGIN - 40 - STAMP_R;
+  const STAMP_CY = H - MARGIN - 40 - STAMP_R;
+  drawCornerStamp(ctx, STAMP_CX, STAMP_CY, STAMP_R);
+}
+
+// Helper: wrap text into up to maxLines lines, adding ellipsis if overflows
+function wrapText(ctx, text, maxWidth, maxLines) {
+  const words = text.split(' ');
+  const lines = [];
+  let currentLine = '';
+
+  for (let i = 0; i < words.length; i++) {
+    const testLine = currentLine ? currentLine + ' ' + words[i] : words[i];
+    const metrics = ctx.measureText(testLine);
+    if (metrics.width > maxWidth && currentLine) {
+      lines.push(currentLine);
+      currentLine = words[i];
+      if (lines.length >= maxLines) break;
+    } else {
+      currentLine = testLine;
+    }
+  }
+  if (currentLine && lines.length < maxLines) lines.push(currentLine);
+
+  // If truncated, add ellipsis to last line
+  if (lines.length === maxLines) {
+    // check if all words consumed
+    const totalConsumed = lines.join(' ').split(' ').length;
+    if (totalConsumed < words.length) {
+      let lastLine = lines[maxLines - 1];
+      while (ctx.measureText(lastLine + '…').width > maxWidth && lastLine.includes(' ')) {
+        lastLine = lastLine.substring(0, lastLine.lastIndexOf(' '));
+      }
+      lines[maxLines - 1] = lastLine + '…';
+    }
+  }
+
+  return lines;
+}
+
+function drawCornerStamp(ctx, x, y, R) {
+  R = R || 70;
+  // Circle bg
+  ctx.fillStyle = 'rgba(255, 212, 71, 0.95)';
+  ctx.beginPath();
+  ctx.arc(x, y, R, 0, Math.PI * 2);
+  ctx.fill();
+
+  // Inner ring
+  ctx.strokeStyle = 'rgba(15, 39, 72, 0.3)';
+  ctx.lineWidth = 1;
+  ctx.beginPath();
+  ctx.arc(x, y, R - 8, 0, Math.PI * 2);
+  ctx.stroke();
+
+  // Scale font sizes proportionally to R (base R=70)
+  const scale = R / 70;
+
+  // Text
+  ctx.fillStyle = '#0F2748';
+  ctx.font = `700 ${Math.round(13 * scale)}px "IBM Plex Sans", sans-serif`;
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  ctx.fillText('CLASS OF', x, y - 13 * scale);
+  ctx.font = `700 ${Math.round(26 * scale)}px "IBM Plex Serif", serif`;
+  ctx.fillText('2026', x, y + 11 * scale);
+}
+
+function roundRect(ctx, x, y, w, h, r) {
+  ctx.beginPath();
+  ctx.moveTo(x + r, y);
+  ctx.lineTo(x + w - r, y);
+  ctx.quadraticCurveTo(x + w, y, x + w, y + r);
+  ctx.lineTo(x + w, y + h - r);
+  ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+  ctx.lineTo(x + r, y + h);
+  ctx.quadraticCurveTo(x, y + h, x, y + h - r);
+  ctx.lineTo(x, y + r);
+  ctx.quadraticCurveTo(x, y, x + r, y);
+  ctx.closePath();
+}
+
+// ============================================================
+//                    POST TEMPLATE
+// ============================================================
+function populatePost() {
+  const text = `Fluentbe uruchamia HR English Academy — program językowy dedykowany specjalistom HR.
+
+Dołączam do rocznika 2026. Cieszę się, że angielski zawodowy dla HR-owców doczekał się osobnego formatu!
+
+Jeśli Twój zespół też rozwija się w tej przestrzeni, warto zobaczyć co fluentbe przygotowało.
+
+#HREnglishAcademy #fluentbe #HR`;
+
+  document.getElementById('postText').textContent = text;
+}
+
+function copyPost() {
+  const text = document.getElementById('postText').innerText;
+  navigator.clipboard.writeText(text).then(() => {
+    const btn = document.getElementById('copyBtn');
+    btn.classList.add('copied');
+    btn.innerHTML = `
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+      Skopiowano!
+    `;
+    setTimeout(() => {
+      btn.classList.remove('copied');
+      btn.innerHTML = `
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+        Skopiuj tekst
+      `;
+    }, 2200);
+  });
+}
+
+function downloadBadge() {
+  const canvas = document.getElementById('badgeCanvas');
+  const link = document.createElement('a');
+  link.download = `hr-english-academy-badge-${Date.now()}.png`;
+  link.href = canvas.toDataURL('image/png');
+  link.click();
+}
+</script>
+
+</div>
+</body>
+</html>
